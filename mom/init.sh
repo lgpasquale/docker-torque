@@ -1,4 +1,4 @@
-echo -e "BASE ${LDAP_BASE}\nURI ${LDAP_SERVER}" > /etc/nslcd.conf
+echo -e "base ${LDAP_BASE}\nuri ${LDAP_SERVER}\nuid nslcd\ngid nslcd" > /etc/nslcd.conf
 for item in passwd shadow group; do
     sed -i "s/${item}:.*/${item}: files ldap/g" /etc/nsswitch.conf
 done
