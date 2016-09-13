@@ -1,7 +1,4 @@
-echo -e "base ${LDAP_BASE}\nuri ${LDAP_SERVER}\nuid nslcd\ngid nslcd" > /etc/nslcd.conf
-for item in passwd shadow group; do
-    sed -i "s/${item}:.*/${item}: files ldap/g" /etc/nsswitch.conf
-done
+authconfig --enableldap --enableldapauth --ldapserver=${LDAP_SERVER} --ldapbasedn=${LDAP_BASE} --update
 #initgroups needs to be commented otherwise secondary groups don't work
 sed -i "s/\(initgroups:.*\)/\#\1/g" /etc/nsswitch.conf
 /usr/sbin/nslcd
