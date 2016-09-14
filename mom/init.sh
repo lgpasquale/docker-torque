@@ -3,11 +3,11 @@ authconfig --enableldap --enableldapauth --ldapserver=${LDAP_SERVER} --ldapbased
 sed -i "s/\(initgroups:.*\)/\#\1/g" /etc/nsswitch.conf
 /usr/sbin/nslcd
 
-hostname -f > /var/spool/torque/server_name
+echo "${PBS_SERVER}" > /var/spool/torque/server_name
 /usr/local/sbin/trqauthd &
 #yes|$(ls -d torque*)/torque.setup root
 
-echo -e "\$pbsserver $PBS_SERVER\n\$logevent 225\n\$log_keep_days 5" > /var/spool/torque/mom_priv/config
+echo -e "\$pbsserver ${PBS_SERVER}\n\$logevent 225\n\$log_keep_days 5\n\$usecp *:${HOME_DIR:-/home} ${HOME_DIR:-/home}" > /var/spool/torque/mom_priv/config
 
 /usr/local/sbin/pbs_mom -d ${PBS_HOME}
 
