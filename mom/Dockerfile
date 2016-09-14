@@ -11,7 +11,7 @@ RUN cd $(ls -d torque*)/ && \
     make && \
     make install
 
-RUN yum -y install nfs-utils openldap-clients nss-pam-ldapd
+RUN yum -y install nfs-utils openldap-clients nss-pam-ldapd authconfig
 
 COPY init.sh /init.sh
 RUN chmod u+x /init.sh

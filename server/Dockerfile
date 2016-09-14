@@ -11,7 +11,7 @@ RUN cd $(ls -d torque*)/ && \
     make && \
     make install
 
-RUN yum -y install initscripts openssh openssh-server nfs-utils openldap-clients nss-pam-ldapd vim
+RUN yum -y install initscripts openssh openssh-server nfs-utils openldap-clients nss-pam-ldapd vim authconfig
 
 COPY init.sh /init.sh
 RUN chmod u+x /init.sh
